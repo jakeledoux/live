@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:300,400,700');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Muli', sans-serif;
+    background: black;
+}
+
+.hidden {
+    display: none;
+}
+
+.user-tile {
+    color: white;
+    /* font-family: sans-serif; */
+    width: 350px;
+    height: 350px;
+    background-size: cover;
+    position: relative;
+    margin: 0;
+    float: left;
+}
+
+.song-info {
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+}
+
+.username {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 10%;
+    height: 10%;
+    border-radius: 1000px;
+    overflow: hidden;
+    background: none;
+}
+.username:hover {
+    width: auto;
+    background: rgba(255,255,255,0.9);
+}
+.username:hover::after {
+    content: attr(title);
+    font-weight: bold;
+    color: #353535;
+    display: flex;
+    align-items: center;
+    float: right;
+    height: 100%;
+    margin: 0 0.5em 0 0.5em;
+    position: relative;
+    bottom: .06em;
+}
+
+.username img {
+    height: 100%;
+    border-radius: 1000px;
+
+}
+
+.song-artist, .song-title, .username {
+    margin: 0;
+}
+
+.song-artist {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.song-title {
+    font-size: 1.4em;
+    font-style: italic;
+    font-weight: 800;
+}
+
+.shadow {
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,.8) 0%, rgba(255,255,255,0) 55%);
+    width: 100%;
+    height: 100%;
+}
+.username-shadow {
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,0) 90%, rgba(0,0,0,.4) 100%);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+#background-tiles {
+    /* height: 100vh; */
+    /* position: fixed; */
+    position: absolute;
+    overflow: hidden;
+    z-index: -1;
+    background: black;
+}
+
+.bg-tile {
+    width: 100px;
+    height: 100px;
+    float: left;
+    background: rgba(255, 255, 255, .02);
+
+}
+
+.bg-tile:nth-child(even) {
+    background: rgba(255, 255, 255, .03);
+}
+
+.clickable:hover {
+    cursor: pointer;
+}
+
+.not-playing {
+    opacity: 0.2;
+}
+.not-playing:hover {
+    opacity: 0.5;
+}
+
+.song-info a {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.song-info a:hover {
+    opacity: 0.6;
+}
+
+.loading-img {
+    width: 75%;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    opacity: 0.2;
+}
+
+.now-playing-img {
+    position: relative;
+    bottom: -1px;
+    left: 5px;
+}
+
+.not-playing .now-playing-img {
+    display: none;
+}
+
+.warning-icon {
+    position: absolute;
+    bottom: 0.5em;
+    right: 0.5em;
+    margin: 0;
+    z-index: 100;
+    color: red;
+    transition: 500ms;
+}
+
+.hide {
+    opacity: 0;
+}
+
+/* Stupid pin shit. Seriously, not being able to read 
+*  current values and add to that is so annoying.. 
+*/
+.pin {
+    display: table;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    margin: 0;
+    width: 10%;
+    height: 10%;
+
+    /* Unclicked */
+    opacity: 0;
+}
+.pin p {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+/* Pinned but not user-hovered */
+.pin.pinned {
+    opacity: 0.5;
+}
+/* Not pinned but user-hovered */
+.user-tile:hover .pin {
+    opacity: 0.4;
+}
+/* Pinned and user-hovered */
+.user-tile:hover .pin.pinned {
+    opacity: 1;
+}
+/* Not pinned but user-hovered and direct-hovered */
+.user-tile:hover .pin:hover {
+    opacity: 0.8;
+}
+/* Pinned, user-hovered, and direct-hovered */
+.user-tile:hover .pin.pinned:hover {
+    opacity: 0.8;
+}
+
+#server-down {
+    z-index: 100;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    color: firebrick;
+    text-align: center;
+}
+#server-down div {
+    margin-top: 3em;
+}
+#server-down h1 {
+    color: firebrick;
+    margin: 0;
+}
+#server-down p {
+    color: gray;
+    margin: 0;
+}
+
+/* #server-down p {
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    height: 3em;
+    font-size: 3em;
+    line-height: 3em;
+    position: absolute;
+    text-align: center;
+    color: firebrick;
+} */
