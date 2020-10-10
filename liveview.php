@@ -20,6 +20,9 @@
         <div id="background-tiles">
         </div>
         <div style="clear: both;"></div>
-        <p class="warning-icon hide" title="Last.fm server is not responding">⚠</p>
+        <div id="server-down">
+            <h1>Connection Issues</h1>
+            <p>Last.fm servers might be having a bad day.</p>
+        </div>
     </body>
 </html>

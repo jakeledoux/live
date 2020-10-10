@@ -142,6 +142,7 @@ function getFriends(username, callback) {
         }, false)).fail(function (data) {
             console.warn("Failed to get friends.")
             console.log(data);
+            setErrorMessage(true);
         }).done(function(data) {
             callback(data);
             console.log(data);
@@ -158,6 +159,7 @@ function getNowPlaying(username, callback) {
         }, false)).fail(function (data) {
             console.warn("Failed to get now playing.")
             console.log(data);
+            setErrorMessage(true);
         }).done(function (data) {
             try {
                 let track = data.recenttracks.track[0];
@@ -220,6 +222,7 @@ function getInfo(username, callback) {
         }, false)).fail(function (data) {
             console.warn("Failed to get user info.")
             console.log(data);
+            setErrorMessage(true);
         }).done(function (data) {
             callback(data);
         });
