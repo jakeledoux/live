@@ -17,12 +17,12 @@
             rel="stylesheet">
     </head>
     <body>
-        <div id="background-tiles">
-        </div>
-        <div style="clear: both;"></div>
-        <div id="server-down">
+        <div id="server-down" class="hidden">
             <h1>Connection Issues</h1>
             <p>Last.fm servers might be having a bad day.</p>
         </div>
+        <div id="background-tiles">
+        </div>
+        <div style="clear: both;"></div>
     </body>
 </html>
