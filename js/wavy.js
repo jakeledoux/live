@@ -25,7 +25,7 @@ function getURL(endpoint, parameters, signed = true) {
     if (signed) {
         param_string += `api_sig=${sign(parameters)}&`;
     }
-    let url = "https://api.wavy.fm/?" + param_string;
+    let url = "https://cors-anywhere.herokuapp.com/api.wavy.fm/" + endpoint + "?" + param_string;
     return url;
 }
 
@@ -47,46 +47,66 @@ function getMobileSession(username, password) {
 
 function getFriends(username, callback, limit=15) {
     $.post(
-        getURL({
-            "method": "user.getFriends",
-            "user": username,
-            "api_key": LAST_KEY,
-            "limit": limit
-        }, false)).fail(function (data) {
+        getURL('profile/friends/' + username, {},
+        false)).fail(function (data) {
             console.warn("Failed to get friends.", data)
             setErrorMessage(true);
         }).done(function(data) {
-            callback(data);
+            let retrofitFriends = {
+                'friends': {
+                    'user': []
+                }
+            }
+            data.forEach(function(user) {
+                retrofitFriends.friends.user.push({
+                    'name': user.username,
+                    'user_id': user.user_id,
+                    'url': "https://wavy.fm/user/" + user.username,
+                    'image': [
+                        {'#text': 'https://images-na.ssl-images-amazon.com/images/I/61vkPO-v8fL._AC_SX425_.jpg'}
+                    ]
+                });
+            });
+            callback(retrofitFriends);
         });
 }
 
 function getNowPlaying(username, callback) {
-    $.post(
-        getURL({
-            "method": "user.getRecentTracks",
-            "user": username,
-            "limit": 1,
-            "api_key": LAST_KEY
+    $.get(
+        getURL('profile/listens/' + username, {
+            'live': true,
+            'page': 0,
+            'size': 2
         }, false)).fail(function (data) {
             console.warn("Failed to get now playing.", data)
             setErrorMessage(true);
         }).done(function (data) {
             try {
-                let track = data.recenttracks.track[0];
+                let currentlyPlaying = data.live != null;
+
+                var track;
+
+                var artwork;
+                var artistHref;
+                var title;
+                var artist;
+                var date;
+                var url;
+
+                if (currentlyPlaying) 
+                    track = data.live;
+                else 
+                    track = data.tracks[0].track;
+
+                artwork = track.album.images[2].url;
+                artistHref = track.artists[0].uri;
+                title = track.name;
+                artist = track.name;
+                date = {'uts': 99999999999};
+                url = track.uri;
+
                 setErrorMessage(false);
-                let currentlyPlaying = track['@attr'] != undefined;
-                let artwork = track.image[3]['#text'];
-                let artistHref = track.url.split("/").slice(0, -2).join("/")
-                if (track.date == undefined)
-                    track.date = {'uts': 99999999999};
-                if (!currentlyPlaying) {
-                    getLength(track.name, track.artist['#text'], function (duration) {
-                        currentlyPlaying = (parseInt(track.date.uts*1000) + duration > Date.now());
-                        callback(track.name, track.artist['#text'], currentlyPlaying, track.date.uts, artwork, track.url, artistHref);
-                    })
-                }
-                else
-                    callback(track.name, track.artist['#text'], currentlyPlaying, track.date.uts, artwork, track.url, artistHref);
+                callback(title, artist, currentlyPlaying, date, artwork, url, artistHref);
             } catch(err) {
                 setErrorMessage(true);
                 console.warn("Failed to get now playing.", err, data);
@@ -124,15 +144,24 @@ function getLength(track, artist, callback) {
 }
 
 function getInfo(username, callback) {
-    $.post(
-        getURL({
-            "method": "user.getInfo",
-            "username": username,
-            "api_key": LAST_KEY
+    $.get(
+        getURL("profiles", {
+            "username": username
         }, false)).fail(function (data) {
-            console.warn("Failed to get user info.", data)
+            console.warn("Failed to get user info.", data);
             setErrorMessage(true);
         }).done(function (data) {
-            callback(data);
+            let user = data[0];
+            let retrofitUser = {
+                'user': {
+                    'realname': user.spotify_display_name,
+                    'user_id': user.user_id,
+                    'url': "https://wavy.fm/user/" + user.username,
+                    'image': [
+                        {'#text': 'https://images-na.ssl-images-amazon.com/images/I/61vkPO-v8fL._AC_SX425_.jpg'}
+                    ]
+                }
+            };
+            callback(retrofitUser);
         });
 }

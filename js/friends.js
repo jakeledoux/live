@@ -206,7 +206,7 @@ function refresh(friends) {
     for (var idx in friends.friends.user) {
         let friend = friends.friends.user[idx];
         createTile(size, friend.name);
-        getNowPlaying(friend.name, function(...args) {
+        getNowPlaying(friend.user_id, function(...args) {
             createTile(size, friend.name, friend.image[0]['#text'], friend.url, ...args);
             resize();
         });
@@ -222,11 +222,11 @@ var FRIENDS;
 $(function() {
     getInfo(USERNAME, function (userInfo) {
         USER = userInfo.user;
-    });
-    getFriends(USERNAME, function(friends) {
-        FRIENDS = friends;
-        refresh(FRIENDS);
-        refreshInterval = setInterval(function() {refresh(FRIENDS)}, 10000);
+        getFriends(USER.user_id, function(friends) {
+            FRIENDS = friends;
+            refresh(FRIENDS);
+            // refreshInterval = setInterval(function() {refresh(FRIENDS)}, 10000);
+        });
     });
     window.onresize = resize;
 })
