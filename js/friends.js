@@ -215,9 +215,9 @@ var USER;
 
 // Document ready
 $(function() {
-    getInfo(USERNAME, function (userInfo) {
-        USER = userInfo.user;
-    });
+    // getInfo(USERNAME, function (userInfo) {
+    //     USER = userInfo.user;
+    // });
     getFriends(USERNAME, main);
     refreshInterval = setInterval(function() {getFriends(USERNAME, main);}, 5000);
     window.onresize = resize;

@@ -19,7 +19,7 @@
     <body>
         <div id="server-down" class="hidden">
             <h1>Connection Issues</h1>
-            <p>Last.fm servers might be having a bad day.</p>
+            <p>wavy.fm servers might be having a bad day, or maybe my code broke. This site is still experimental.</p>
         </div>
         <div id="background-tiles">
         </div>
