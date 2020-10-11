@@ -135,8 +135,7 @@ function getFriends(username, callback, limit=15) {
         getURL({
             "method": "user.getFriends",
             "user": username,
-            "api_key": LAST_KEY,
-            "limit": limit
+            "api_key": LAST_KEY
         }, false)).fail(function (data) {
             console.warn("Failed to get friends.", data)
             setErrorMessage(true);
