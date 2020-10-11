@@ -1,5 +1,5 @@
-const LAST_KEY = "d3e47bc9e06050f6dbd2dbd136d90f33";
-const LAST_SECRET = "41c672a4faef85c49817dbe413dd98e3";
+const LAST_KEY = "f76166b41b4c9451176fa01ce972a117";
+const LAST_SECRET = "6a579489f53255010774fae37b685408";
 var LAST_SESSION = "";
 var LOVED_TRACKS = [];
 
@@ -71,8 +71,7 @@ function loveTrack(title, artist) {
         "api_key": LAST_KEY,
         "sk": LAST_SESSION
     })).fail(function (data) {
-        console.warn("Failed to love track.")
-        console.log(data);
+        console.warn("Failed to love track.", data)
     }).done(function() {
         LOVED_TRACKS.push({'title': title, 'artist': artist});
     });
@@ -91,8 +90,7 @@ function unLoveTrack(title, artist) {
             "api_key": LAST_KEY,
             "sk": LAST_SESSION
         })).fail(function (data) {
-            console.warn("Failed to un-love track.")
-            console.log(data);
+            console.warn("Failed to un-love track.", data)
         }).done(function () {
             LOVED_TRACKS.pop(getLovedIndex(title, artist));
         });
@@ -106,8 +104,7 @@ function getLovedTracks(username) {
             "user": username,
             "api_key": LAST_KEY
         }, false)).fail(function (data) {
-            console.warn("Failed to get loved tracks.")
-            console.log(data);
+            console.warn("Failed to get loved tracks.", data)
         }).done(function (data) {
             writeLovedTracks(data.lovedtracks.track);
         });
@@ -133,19 +130,18 @@ function getLovedIndex(title, artist) {
     return false;
 }
 
-function getFriends(username, callback) {
+function getFriends(username, callback, limit=15) {
     $.post(
         getURL({
             "method": "user.getFriends",
             "user": username,
-            "api_key": LAST_KEY
+            "api_key": LAST_KEY,
+            "limit": limit
         }, false)).fail(function (data) {
-            console.warn("Failed to get friends.")
-            console.log(data);
+            console.warn("Failed to get friends.", data)
             setErrorMessage(true);
         }).done(function(data) {
             callback(data);
-            console.log(data);
         });
 }
 
@@ -157,8 +153,7 @@ function getNowPlaying(username, callback) {
             "limit": 1,
             "api_key": LAST_KEY
         }, false)).fail(function (data) {
-            console.warn("Failed to get now playing.")
-            console.log(data);
+            console.warn("Failed to get now playing.", data)
             setErrorMessage(true);
         }).done(function (data) {
             try {
@@ -177,8 +172,9 @@ function getNowPlaying(username, callback) {
                 }
                 else
                     callback(track.name, track.artist['#text'], currentlyPlaying, track.date.uts, artwork, track.url, artistHref);
-            } catch(TypeError) {
+            } catch(err) {
                 setErrorMessage(true);
+                console.warn("Failed to get now playing.", err, data);
             }
         });
 }
@@ -194,8 +190,7 @@ function getLength(track, artist, callback) {
                 "artist": artist,
                 "api_key": LAST_KEY
             }, false)).fail(function (data) {
-                console.warn("Failed to get length.")
-                console.log(data);
+                console.warn("Failed to get length.", data)
             }).done(function (data) {
                 if (data.error == undefined) {
                     // Cache duration
@@ -220,8 +215,7 @@ function getInfo(username, callback) {
             "username": username,
             "api_key": LAST_KEY
         }, false)).fail(function (data) {
-            console.warn("Failed to get user info.")
-            console.log(data);
+            console.warn("Failed to get user info.", data)
             setErrorMessage(true);
         }).done(function (data) {
             callback(data);
