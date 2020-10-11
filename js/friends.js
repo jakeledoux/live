@@ -175,7 +175,7 @@ function togglePin() {
     sort();
 }
 
-function refresh(friends) {
+function refreshLastFM(friends) {
     // Friends haven't been loaded yet
     if (friends == undefined)
         return false;
@@ -224,8 +224,8 @@ $(function() {
         USER = userInfo.user;
         getFriends(USERNAME, function(friends) {
             FRIENDS = friends;
-            refresh(FRIENDS);
-            refreshInterval = setInterval(function() {refresh(FRIENDS)}, 10000);
+            refreshLastFM(FRIENDS);
+            refreshInterval = setInterval(function() {refreshLastFM(FRIENDS)}, 10000);
         });
     });
     window.onresize = resize;
