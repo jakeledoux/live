@@ -1,5 +1,5 @@
-const LAST_KEY = "f76166b41b4c9451176fa01ce972a117";
-const LAST_SECRET = "6a579489f53255010774fae37b685408";
+// const LAST_KEY = "f76166b41b4c9451176fa01ce972a117";
+// const LAST_SECRET = "6a579489f53255010774fae37b685408";
 // var LAST_SESSION = "";
 
 // Low level ------------------------------------------
@@ -16,7 +16,7 @@ function sign(parameters) {
     return sig;
 }
 
-function getURL(parameters, signed = true) {
+function getURL(endpoint, parameters, signed = true) {
     let param_string = "";
     for (key in parameters)
     {
@@ -25,7 +25,7 @@ function getURL(parameters, signed = true) {
     if (signed) {
         param_string += `api_sig=${sign(parameters)}&`;
     }
-    let url = "https://ws.audioscrobbler.com/2.0/?" + param_string + "format=json";
+    let url = "https://api.wavy.fm/?" + param_string;
     return url;
 }
 
