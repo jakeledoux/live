@@ -25,7 +25,8 @@ function getURL(endpoint, parameters, signed = true) {
     if (signed) {
         param_string += `api_sig=${sign(parameters)}&`;
     }
-    let url = "https://cors-anywhere.herokuapp.com/api.wavy.fm/" + endpoint + "?" + param_string;
+    // let url = "https://cors-anywhere.herokuapp.com/api.wavy.fm/" + endpoint + "?" + param_string;
+    let url = "https://api.wavy.fm/" + endpoint + "?" + param_string;
     return url;
 }
 
@@ -46,7 +47,7 @@ function getMobileSession(username, password) {
 }
 
 function getFriends(username, callback, limit=15) {
-    $.post(
+    $.get(
         getURL('profile/friends/' + username, {},
         false)).fail(function (data) {
             console.warn("Failed to get friends.", data)
@@ -63,7 +64,7 @@ function getFriends(username, callback, limit=15) {
                     'user_id': user.user_id,
                     'url': "https://wavy.fm/user/" + user.username,
                     'image': [
-                        {'#text': 'https://images-na.ssl-images-amazon.com/images/I/61vkPO-v8fL._AC_SX425_.jpg'}
+                        {'#text': "data:image/jpeg;base64, " + user.avatar}
                     ]
                 });
             });
@@ -93,16 +94,19 @@ function getNowPlaying(username, callback) {
                 var date;
                 var url;
 
-                if (currentlyPlaying) 
+                if (currentlyPlaying) {
                     track = data.live;
-                else 
+                    date = 9999999999999;
+                }
+                else {
                     track = data.tracks[0].track;
+                    date = data.tracks[0].date['$date'];
+                }
 
-                artwork = track.album.images[2].url;
+                artwork = track.album.images[1].url;
                 artistHref = track.artists[0].uri;
                 title = track.name;
-                artist = track.name;
-                date = {'uts': 99999999999};
+                artist = track.artists[0].name;
                 url = track.uri;
 
                 setErrorMessage(false);
@@ -158,7 +162,7 @@ function getInfo(username, callback) {
                     'user_id': user.user_id,
                     'url': "https://wavy.fm/user/" + user.username,
                     'image': [
-                        {'#text': 'https://images-na.ssl-images-amazon.com/images/I/61vkPO-v8fL._AC_SX425_.jpg'}
+                        {'#text': "data:image/jpeg;base64, " + user.avatar}
                     ]
                 }
             };

@@ -200,7 +200,7 @@ function refresh(friends) {
     var [columns, rows, size] = getSize();
     // Create tiles
     createTile(size, USERNAME);
-    getNowPlaying(USERNAME, function (...args) {
+    getNowPlaying(USER.user_id, function (...args) {
         createTile(size, USERNAME, USER.image[0]['#text'], USER.url, ...args);
     })
     for (var idx in friends.friends.user) {
