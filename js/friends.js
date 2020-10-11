@@ -175,7 +175,11 @@ function togglePin() {
     sort();
 }
 
-function main(friends) {
+function refresh(friends) {
+    // Friends haven't been loaded yet
+    if (friends == undefined)
+        return false;
+
     console.log("Refreshing...");
     // Last.fm failed to provide information on the user
     if (friends.friends == undefined) {
@@ -212,14 +216,17 @@ function main(friends) {
 
 var USERNAME = $("meta[property='username']").attr("content");
 var USER;
+var FRIENDS;
 
 // Document ready
 $(function() {
-    // getInfo(USERNAME, function (userInfo) {
-    //     USER = userInfo.user;
-    // });
-    getFriends(USERNAME, main);
-    refreshInterval = setInterval(function() {getFriends(USERNAME, main);}, 5000);
+    getInfo(USERNAME, function (userInfo) {
+        USER = userInfo.user;
+    });
+    getFriends(USERNAME, function(friends) {
+        FRIENDS = friends;
+    });
+    refreshInterval = setInterval(function() {refresh(FRIENDS)}, 10000);
     window.onresize = resize;
 })
 
