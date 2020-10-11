@@ -225,8 +225,9 @@ $(function() {
     });
     getFriends(USERNAME, function(friends) {
         FRIENDS = friends;
+        refresh(FRIENDS);
+        refreshInterval = setInterval(function() {refresh(FRIENDS)}, 10000);
     });
-    refreshInterval = setInterval(function() {refresh(FRIENDS)}, 10000);
     window.onresize = resize;
 })
 
