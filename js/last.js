@@ -144,7 +144,7 @@ function getFriends(username, callback, limit=15) {
         });
 }
 
-function getNowPlaying(username, callback) {
+function getNowPlaying(username, callback, checkLength=false) {
     $.post(
         getURL({
             "method": "user.getRecentTracks",
@@ -163,7 +163,7 @@ function getNowPlaying(username, callback) {
                 let artistHref = track.url.split("/").slice(0, -2).join("/")
                 if (track.date == undefined)
                     track.date = {'uts': 99999999999};
-                if (!currentlyPlaying) {
+                if (!currentlyPlaying && checkLength) {
                     getLength(track.name, track.artist['#text'], function (duration) {
                         currentlyPlaying = (parseInt(track.date.uts*1000) + duration > Date.now());
                         callback(track.name, track.artist['#text'], currentlyPlaying, track.date.uts, artwork, track.url, artistHref);
