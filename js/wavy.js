@@ -1,12 +1,8 @@
 const LAST_KEY = "f76166b41b4c9451176fa01ce972a117";
 const LAST_SECRET = "6a579489f53255010774fae37b685408";
-var LAST_SESSION = "";
+// var LAST_SESSION = "";
 
 // Low level ------------------------------------------
-
-function writeSession(session) {
-    LAST_SESSION = session;
-}
 
 function sign(parameters) {
     let param_string = "";
