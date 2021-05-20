@@ -210,7 +210,7 @@ html, body {
     opacity: 0.8;
 }
 
-#server-down {
+.error-msg {
     z-index: 100;
     background-color: black;
     width: 100%;
@@ -219,16 +219,17 @@ html, body {
     color: firebrick;
     text-align: center;
 }
-#server-down div {
+.error-msg div {
     margin-top: 3em;
 }
-#server-down h1 {
+.error-msg h1 {
     color: firebrick;
     margin: 0;
 }
-#server-down p {
+.error-msg p {
     color: gray;
-    margin: 0;
+    margin: auto;
+    max-width: 50em;
 }
 
 /* #server-down p {

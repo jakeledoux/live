@@ -138,7 +138,7 @@ function getFriends(username, callback, limit=15) {
             "api_key": LAST_KEY
         }, false)).fail(function (data) {
             console.warn("Failed to get friends.", data)
-            setErrorMessage(true);
+            setErrorMessage("no-friends");
         }).done(function(data) {
             callback(data);
         });
@@ -153,7 +153,7 @@ function getNowPlaying(username, callback, checkLength=false) {
             "api_key": LAST_KEY
         }, false)).fail(function (data) {
             console.warn("Failed to get now playing.", data)
-            setErrorMessage(true);
+            setErrorMessage("connection");
         }).done(function (data) {
             try {
                 let track = data.recenttracks.track[0];
@@ -172,7 +172,7 @@ function getNowPlaying(username, callback, checkLength=false) {
                 else
                     callback(track.name, track.artist['#text'], currentlyPlaying, track.date.uts, artwork, track.url, artistHref);
             } catch(err) {
-                setErrorMessage(true);
+                setErrorMessage("connection");
                 console.warn("Failed to get now playing.", err, data);
             }
         });
@@ -215,7 +215,7 @@ function getInfo(username, callback) {
             "api_key": LAST_KEY
         }, false)).fail(function (data) {
             console.warn("Failed to get user info.", data)
-            setErrorMessage(true);
+            setErrorMessage("connection");
         }).done(function (data) {
             callback(data);
         });

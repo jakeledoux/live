@@ -263,9 +263,14 @@ function resize() {
 }
 
 function setErrorMessage(state) {
-    if (state)
+    if (state == "connection")
         $("#server-down").removeClass("hidden");
+    else if (state == "no-friends")
+        $("#no-friends").removeClass("hidden");
     else
+    {
         $("#server-down").addClass("hidden");
+        $("#no-friends").addClass("hidden");
+    }
 }
 // $(window).resize(resize);
