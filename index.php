@@ -1,5 +1,6 @@
 <?php
-    $username = explode('/', $_SERVER['REQUEST_URI']);
+    $uri = $_SERVER['REQUEST_URI'];
+    $username = explode('/', $uri);
     $username = end($username);
     if ($username == "")
         include 'homepage.php';
