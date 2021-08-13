@@ -9,9 +9,9 @@
         <title><?= $username ?> | Last.fm Live</title>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script src="js/friends.js?rev=a-cache-you-cant-sweat-out"></script>
-        <script src="js/md5.js?rev=a-cache-you-cant-sweat-out"></script>
-        <script src="js/last.js?rev=a-cache-you-cant-sweat-out"></script>
+        <script src="js/friends.js?rev=mr-poopy-pants"></script>
+        <script src="js/md5.js?rev=mr-poopy-pants"></script>
+        <script src="js/last.js?rev=mr-poopy-pants"></script>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="style.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
