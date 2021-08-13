@@ -26,7 +26,7 @@ function createTile(size, username, userImg, userHref, title, artist, currentlyP
     $(tile).attr('user', username);
     
     if (userHref == undefined) {
-        if ($(`.user-tile[user=${username}]`).length)
+        if ($(`.user-tile[user="${username}"]`).length)
             return
         // Create placeholder tile
         $(tile).attr('time', 0);
@@ -115,8 +115,8 @@ function createTile(size, username, userImg, userHref, title, artist, currentlyP
         tile.append(temp);
     }
 
-    if ($(`.user-tile[user=${username}]`).length) {
-        $(`.user-tile[user=${username}]`).replaceWith(tile);
+    if ($(`.user-tile[user="${username}"]`).length) {
+        $(`.user-tile[user="${username}]"`).replaceWith(tile);
     }
     else
         document.body.prepend(tile);
