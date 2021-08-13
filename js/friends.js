@@ -24,7 +24,7 @@ function createTile(size, username, userImg, userHref, title, artist, currentlyP
     tile = document.createElement("div");
     tile.classList.add("user-tile");
     $(tile).attr('user', username);
-    
+
     if (userHref == undefined) {
         if ($(`.user-tile[user="${username}"]`).length)
             return
@@ -211,7 +211,7 @@ function refreshLastFM(friends) {
             resize();
         });
     }
-    
+
 }
 
 var USERNAME = $("meta[property='username']").attr("content");
