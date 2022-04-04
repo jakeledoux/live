@@ -73,6 +73,6 @@
             <input type="submit" value="go">
         </div>
     </form>
-	<a href="https://last.fm/user/jakeledoux" style="position: absolute;bottom: 1em;margin: auto;transform: translateX(-50%);-webkit-transform: translateX(-50%);left: 50%;color: firebrick;">&gt; follow me on last.fm &lt;</a>
+	<a href="https://last.fm/user/jakeledoux" style="position: absolute;bottom: 1em;margin: auto;transform: translateX(-50%);-webkit-transform: translateX(-50%);left: 50%;color: firebrick;">&gt; follow me / leave a shout on last.fm &lt;</a>
 </body>
 </html>
